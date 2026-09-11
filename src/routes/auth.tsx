@@ -55,10 +55,9 @@ function AuthPage() {
   const [awaitingConfirm, setAwaitingConfirm] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      const timer = setTimeout(() => navigate({ to: "/datasets" }), 800);
-      return () => clearTimeout(timer);
-    }
+    if (!user) return undefined;
+    const timer = setTimeout(() => navigate({ to: "/datasets" }), 800);
+    return () => clearTimeout(timer);
   }, [user, navigate]);
 
   const handleSignIn = async (e: React.FormEvent) => {
