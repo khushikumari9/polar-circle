@@ -11,7 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as CollaborationRouteImport } from './routes/collaboration'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DatasetsRouteImport } from './routes/datasets'
+import { Route as EducationRouteImport } from './routes/education'
+import { Route as NewsRouteImport } from './routes/news'
+import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as VisualizationRouteImport } from './routes/visualization'
 
 const IndexRoute = IndexRouteImport.update({
@@ -24,9 +30,39 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollaborationRoute = CollaborationRouteImport.update({
+  id: '/collaboration',
+  path: '/collaboration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DatasetsRoute = DatasetsRouteImport.update({
   id: '/datasets',
   path: '/datasets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationRoute = EducationRouteImport.update({
+  id: '/education',
+  path: '/education',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutreachRoute = OutreachRouteImport.update({
+  id: '/outreach',
+  path: '/outreach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VisualizationRoute = VisualizationRouteImport.update({
@@ -38,34 +74,89 @@ const VisualizationRoute = VisualizationRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/careers': typeof CareersRoute
+  '/collaboration': typeof CollaborationRoute
+  '/dashboard': typeof DashboardRoute
   '/datasets': typeof DatasetsRoute
+  '/education': typeof EducationRoute
+  '/news': typeof NewsRoute
+  '/outreach': typeof OutreachRoute
   '/visualization': typeof VisualizationRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/careers': typeof CareersRoute
+  '/collaboration': typeof CollaborationRoute
+  '/dashboard': typeof DashboardRoute
   '/datasets': typeof DatasetsRoute
+  '/education': typeof EducationRoute
+  '/news': typeof NewsRoute
+  '/outreach': typeof OutreachRoute
   '/visualization': typeof VisualizationRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/careers': typeof CareersRoute
+  '/collaboration': typeof CollaborationRoute
+  '/dashboard': typeof DashboardRoute
   '/datasets': typeof DatasetsRoute
+  '/education': typeof EducationRoute
+  '/news': typeof NewsRoute
+  '/outreach': typeof OutreachRoute
   '/visualization': typeof VisualizationRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/datasets' | '/visualization'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/careers'
+    | '/collaboration'
+    | '/dashboard'
+    | '/datasets'
+    | '/education'
+    | '/news'
+    | '/outreach'
+    | '/visualization'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/datasets' | '/visualization'
-  id: '__root__' | '/' | '/auth' | '/datasets' | '/visualization'
+  to:
+    | '/'
+    | '/auth'
+    | '/careers'
+    | '/collaboration'
+    | '/dashboard'
+    | '/datasets'
+    | '/education'
+    | '/news'
+    | '/outreach'
+    | '/visualization'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/careers'
+    | '/collaboration'
+    | '/dashboard'
+    | '/datasets'
+    | '/education'
+    | '/news'
+    | '/outreach'
+    | '/visualization'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  CareersRoute: typeof CareersRoute
+  CollaborationRoute: typeof CollaborationRoute
+  DashboardRoute: typeof DashboardRoute
   DatasetsRoute: typeof DatasetsRoute
+  EducationRoute: typeof EducationRoute
+  NewsRoute: typeof NewsRoute
+  OutreachRoute: typeof OutreachRoute
   VisualizationRoute: typeof VisualizationRoute
 }
 
@@ -85,11 +176,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collaboration': {
+      id: '/collaboration'
+      path: '/collaboration'
+      fullPath: '/collaboration'
+      preLoaderRoute: typeof CollaborationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/datasets': {
       id: '/datasets'
       path: '/datasets'
       fullPath: '/datasets'
       preLoaderRoute: typeof DatasetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education': {
+      id: '/education'
+      path: '/education'
+      fullPath: '/education'
+      preLoaderRoute: typeof EducationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outreach': {
+      id: '/outreach'
+      path: '/outreach'
+      fullPath: '/outreach'
+      preLoaderRoute: typeof OutreachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/visualization': {
@@ -105,7 +238,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  CareersRoute: CareersRoute,
+  CollaborationRoute: CollaborationRoute,
+  DashboardRoute: DashboardRoute,
   DatasetsRoute: DatasetsRoute,
+  EducationRoute: EducationRoute,
+  NewsRoute: NewsRoute,
+  OutreachRoute: OutreachRoute,
   VisualizationRoute: VisualizationRoute,
 }
 export const routeTree = rootRouteImport
