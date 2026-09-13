@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Menu, Snowflake, X } from "lucide-react";
+import { ChevronDown, Menu, Snowflake, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useAuth, roleLabels } from "@/lib/auth";
+import { stations } from "@/lib/portal-data";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/datasets", label: "Datasets" },
   { to: "/visualization", label: "Visualization" },
   { to: "/outreach", label: "Outreach" },
   { to: "/education", label: "Education" },
