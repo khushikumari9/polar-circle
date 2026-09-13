@@ -47,6 +47,24 @@ export function SiteHeader() {
         </Link>
 
         <nav className="ml-auto hidden items-center gap-1 lg:flex">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground data-[state=open]:bg-secondary data-[state=open]:text-foreground">
+              Datasets <ChevronDown className="size-3.5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-56">
+              <DropdownMenuItem asChild>
+                <Link to="/datasets" className="font-medium">All datasets</Link>
+              </DropdownMenuItem>
+              {stations.map((s) => (
+                <DropdownMenuItem key={s.slug} asChild>
+                  <Link to="/datasets" hash={s.slug}>
+                    <span>{s.name}</span>
+                    <span className="ml-auto text-xs text-muted-foreground">{s.established}</span>
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
           {links.map((l) => (
             <Link
               key={l.to}
@@ -99,6 +117,27 @@ export function SiteHeader() {
       {open && (
         <nav className="border-t border-border bg-background px-4 pb-4 lg:hidden">
           <div className="grid gap-1 pt-2">
+            <Link
+              to="/datasets"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
+              activeProps={{ className: "bg-secondary text-foreground" }}
+            >
+              Datasets
+            </Link>
+            <div className="ml-4 grid gap-1 border-l border-border pl-3">
+              {stations.map((s) => (
+                <Link
+                  key={s.slug}
+                  to="/datasets"
+                  hash={s.slug}
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
+                >
+                  {s.name}
+                </Link>
+              ))}
+            </div>
             {links.map((l) => (
               <Link
                 key={l.to}
