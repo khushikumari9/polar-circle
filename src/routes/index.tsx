@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Database, GraduationCap, Map, Newspaper } from "lucide-react";
+import { ArrowRight, Database, GraduationCap, Map, Mountain, Newspaper, Ship, Snowflake, Waves } from "lucide-react";
 import heroImage from "@/assets/polar-hero.jpg";
+import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +32,14 @@ const quickLinks = [
   { to: "/education", icon: GraduationCap, title: "Education", text: "Quizzes, learning modules and student-friendly explainers." },
   { to: "/news", icon: Newspaper, title: "News", text: "Expedition updates, workshops and conference announcements." },
 ] as const;
+
+const stationIcons: Record<string, typeof Snowflake> = {
+  maitri: Snowflake,
+  bharati: Waves,
+  himadri: Mountain,
+  himansh: Mountain,
+  "southern-ocean": Ship,
+};
 
 function Home() {
   return (
