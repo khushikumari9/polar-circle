@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Database, GraduationCap, Map, Newspaper } from "lucide-react";
+import { ArrowRight, Database, GraduationCap, Map, Mountain, Newspaper, Ship, Snowflake, Waves } from "lucide-react";
 import heroImage from "@/assets/polar-hero.jpg";
+import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -32,6 +33,14 @@ const quickLinks = [
   { to: "/news", icon: Newspaper, title: "News", text: "Expedition updates, workshops and conference announcements." },
 ] as const;
 
+const stationIcons: Record<string, typeof Snowflake> = {
+  maitri: Snowflake,
+  bharati: Waves,
+  himadri: Mountain,
+  himansh: Mountain,
+  "southern-ocean": Ship,
+};
+
 function Home() {
   return (
     <>
@@ -45,8 +54,8 @@ function Home() {
         />
         <div className="absolute inset-0 bg-deep/75" />
         <div className="relative mx-auto max-w-7xl px-4 py-24 text-deep-foreground sm:py-32">
-          <Badge variant="secondary" className="mb-6">National Centre for Polar and Ocean Research</Badge>
-          <h1 className="max-w-4xl text-3xl font-semibold sm:text-5xl">
+          <Badge variant="secondary" className="mb-6 animate-fade-in">National Centre for Polar and Ocean Research</Badge>
+          <h1 className="max-w-4xl animate-fade-in text-3xl font-semibold sm:text-5xl">
             Integrated Polar Science Outreach, Knowledge Repository and Media Dissemination Portal
           </h1>
           <p className="mt-5 max-w-2xl text-base opacity-90 sm:text-lg">
@@ -77,29 +86,37 @@ function Home() {
         </div>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {stations.map((station) => (
-            <Card key={station.slug} className="overflow-hidden transition-shadow hover:shadow-polar">
-              <div className="h-1.5 bg-polar" />
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between gap-2 text-lg">
-                  {station.name}
-                  <Badge variant="outline">{station.established}</Badge>
-                </CardTitle>
-                <CardDescription>{station.region}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground">{station.blurb}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {station.parameters.slice(0, 3).map((p) => (
-                    <Badge key={p} variant="secondary" className="font-normal">{p}</Badge>
-                  ))}
-                </div>
-                <Button asChild variant="link" className="px-0">
-                  <Link to="/datasets" hash={station.slug}>Open station data</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+          {stations.map((station, i) => {
+            const StationIcon = stationIcons[station.slug] ?? Snowflake;
+            return (
+              <Reveal key={station.slug} delay={i * 80}>
+                <Card className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-polar">
+                  <div className="h-1.5 bg-polar" />
+                  <CardHeader>
+                    <span className="mb-2 flex size-10 items-center justify-center rounded-md bg-ice text-ice-foreground">
+                      <StationIcon className="size-5" />
+                    </span>
+                    <CardTitle className="flex items-center justify-between gap-2 text-lg">
+                      {station.name}
+                      <Badge variant="outline">{station.established}</Badge>
+                    </CardTitle>
+                    <CardDescription>{station.region}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">{station.blurb}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {station.parameters.slice(0, 3).map((p) => (
+                        <Badge key={p} variant="secondary" className="font-normal">{p}</Badge>
+                      ))}
+                    </div>
+                    <Button asChild variant="link" className="px-0">
+                      <Link to="/datasets" hash={station.slug}>Open station data</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
