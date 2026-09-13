@@ -100,16 +100,43 @@ export default function OutreachPage() {
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {gallery.map((caption) => (
-              <figure key={caption} className="overflow-hidden rounded-lg border border-border bg-card">
-                <AspectRatio ratio={4 / 3}>
-                  <div className="flex size-full items-center justify-center bg-gradient-to-br from-secondary to-background text-muted-foreground">
-                    <Camera className="size-8" />
-                  </div>
-                </AspectRatio>
+              <figure
+                key={caption}
+                className="group overflow-hidden rounded-lg border border-border bg-card transition-shadow hover:shadow-polar"
+              >
+                <button
+                  type="button"
+                  onClick={() => setLightbox(caption)}
+                  className="block w-full cursor-zoom-in"
+                  aria-label={`Open ${caption} in lightbox`}
+                >
+                  <AspectRatio ratio={4 / 3}>
+                    <div className="relative flex size-full items-center justify-center bg-gradient-to-br from-secondary to-background text-muted-foreground transition-transform duration-300 group-hover:scale-105">
+                      <Camera className="size-8" />
+                      <span className="absolute bottom-2 right-2 flex size-7 items-center justify-center rounded-full bg-deep/70 text-deep-foreground opacity-0 transition-opacity group-hover:opacity-100">
+                        <Expand className="size-3.5" />
+                      </span>
+                    </div>
+                  </AspectRatio>
+                </button>
                 <figcaption className="px-3 py-2 text-xs text-muted-foreground">{caption}</figcaption>
               </figure>
             ))}
           </div>
+
+          <Dialog open={lightbox !== null} onOpenChange={(open) => !open && setLightbox(null)}>
+            <DialogContent className="max-w-3xl">
+              <DialogHeader>
+                <DialogTitle>{lightbox}</DialogTitle>
+                <DialogDescription>Expedition photograph — full image coming soon.</DialogDescription>
+              </DialogHeader>
+              <AspectRatio ratio={16 / 10}>
+                <div className="flex size-full items-center justify-center rounded-md bg-icefield text-muted-foreground">
+                  <Camera className="size-14" />
+                </div>
+              </AspectRatio>
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
 
