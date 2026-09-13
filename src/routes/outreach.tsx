@@ -1,5 +1,13 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Camera, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Camera, Expand, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { PageHeader } from "@/components/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -56,6 +64,8 @@ const gallery = [
 ];
 
 export default function OutreachPage() {
+  const [lightbox, setLightbox] = useState<string | null>(null);
+
   return (
     <>
       <PageHeader
