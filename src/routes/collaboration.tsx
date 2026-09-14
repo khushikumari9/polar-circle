@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Globe2, Handshake, Users } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
+import { Reveal } from "@/components/reveal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -123,8 +124,9 @@ function CollaborationPage() {
           Placeholder listing — full contact details are visible to signed-in researchers.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {directory.map((d) => (
-            <Card key={d.name}>
+          {directory.map((d, i) => (
+            <Reveal key={d.name} delay={i * 70}>
+            <Card className="h-full transition-shadow hover:shadow-polar">
               <CardHeader>
                 <CardTitle className="text-base">{d.name}</CardTitle>
                 <CardDescription>{d.field}</CardDescription>
@@ -142,6 +144,7 @@ function CollaborationPage() {
                 )}
               </CardContent>
             </Card>
+            </Reveal>
           ))}
         </div>
       </section>
