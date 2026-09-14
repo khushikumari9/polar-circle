@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Briefcase, CalendarDays, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
+import { Reveal } from "@/components/reveal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -91,8 +92,9 @@ function CareersPage() {
       <section className="mx-auto max-w-7xl px-4 py-12">
         <h2 className="text-2xl font-semibold">Current openings</h2>
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-          {openings.map((o) => (
-            <Card key={o.title}>
+          {openings.map((o, i) => (
+            <Reveal key={o.title} delay={i * 80}>
+            <Card className="h-full transition-shadow hover:shadow-polar">
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Badge>{o.type}</Badge>
@@ -112,6 +114,7 @@ function CareersPage() {
                 </Button>
               </CardContent>
             </Card>
+            </Reveal>
           ))}
         </div>
       </section>
