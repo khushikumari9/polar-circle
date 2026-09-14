@@ -18,6 +18,7 @@ import { Route as DatasetsRouteImport } from './routes/datasets'
 import { Route as EducationRouteImport } from './routes/education'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as OutreachRouteImport } from './routes/outreach'
+import { Route as SubmitDataRouteImport } from './routes/submit-data'
 import { Route as VisualizationRouteImport } from './routes/visualization'
 
 const IndexRoute = IndexRouteImport.update({
@@ -65,6 +66,11 @@ const OutreachRoute = OutreachRouteImport.update({
   path: '/outreach',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SubmitDataRoute = SubmitDataRouteImport.update({
+  id: '/submit-data',
+  path: '/submit-data',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VisualizationRoute = VisualizationRouteImport.update({
   id: '/visualization',
   path: '/visualization',
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/education': typeof EducationRoute
   '/news': typeof NewsRoute
   '/outreach': typeof OutreachRoute
+  '/submit-data': typeof SubmitDataRoute
   '/visualization': typeof VisualizationRoute
 }
 export interface FileRoutesByTo {
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/education': typeof EducationRoute
   '/news': typeof NewsRoute
   '/outreach': typeof OutreachRoute
+  '/submit-data': typeof SubmitDataRoute
   '/visualization': typeof VisualizationRoute
 }
 export interface FileRoutesById {
@@ -106,6 +114,7 @@ export interface FileRoutesById {
   '/education': typeof EducationRoute
   '/news': typeof NewsRoute
   '/outreach': typeof OutreachRoute
+  '/submit-data': typeof SubmitDataRoute
   '/visualization': typeof VisualizationRoute
 }
 export interface FileRouteTypes {
@@ -120,6 +129,7 @@ export interface FileRouteTypes {
     | '/education'
     | '/news'
     | '/outreach'
+    | '/submit-data'
     | '/visualization'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/education'
     | '/news'
     | '/outreach'
+    | '/submit-data'
     | '/visualization'
   id:
     | '__root__'
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/education'
     | '/news'
     | '/outreach'
+    | '/submit-data'
     | '/visualization'
   fileRoutesById: FileRoutesById
 }
@@ -157,6 +169,7 @@ export interface RootRouteChildren {
   EducationRoute: typeof EducationRoute
   NewsRoute: typeof NewsRoute
   OutreachRoute: typeof OutreachRoute
+  SubmitDataRoute: typeof SubmitDataRoute
   VisualizationRoute: typeof VisualizationRoute
 }
 
@@ -225,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OutreachRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/submit-data': {
+      id: '/submit-data'
+      path: '/submit-data'
+      fullPath: '/submit-data'
+      preLoaderRoute: typeof SubmitDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/visualization': {
       id: '/visualization'
       path: '/visualization'
@@ -245,6 +265,7 @@ const rootRouteChildren: RootRouteChildren = {
   EducationRoute: EducationRoute,
   NewsRoute: NewsRoute,
   OutreachRoute: OutreachRoute,
+  SubmitDataRoute: SubmitDataRoute,
   VisualizationRoute: VisualizationRoute,
 }
 export const routeTree = rootRouteImport

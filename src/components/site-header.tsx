@@ -12,7 +12,14 @@ import {
 import { useAuth, roleLabels } from "@/lib/auth";
 import { stations } from "@/lib/portal-data";
 
-const links = [
+const publicLinks = [
+  { to: "/", label: "Home" },
+  { to: "/outreach", label: "Outreach" },
+  { to: "/education", label: "Education" },
+  { to: "/news", label: "News" },
+] as const;
+
+const memberLinks = [
   { to: "/", label: "Home" },
   { to: "/visualization", label: "Visualization" },
   { to: "/outreach", label: "Outreach" },
@@ -24,8 +31,10 @@ const links = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const { user, role, isAdmin, signOut } = useAuth();
+  const { user, role, isAdmin, isResearcher, signOut } = useAuth();
   const navigate = useNavigate();
+  const links = isResearcher ? memberLinks : publicLinks;
+  const showSubmit = isResearcher && !isAdmin;
 
   const handleSignOut = async () => {
     await signOut();
@@ -46,7 +55,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-1 lg:flex">
+        <nav key={role} className="ml-auto hidden animate-fade-in items-center gap-1 lg:flex">
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground data-[state=open]:bg-secondary data-[state=open]:text-foreground">
               Datasets <ChevronDown className="size-3.5" />
@@ -76,13 +85,22 @@ export function SiteHeader() {
               {l.label}
             </Link>
           ))}
+          {showSubmit && (
+            <Link
+              to="/submit-data"
+              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              activeProps={{ className: "bg-secondary text-foreground" }}
+            >
+              Submit Data
+            </Link>
+          )}
           {isAdmin && (
             <Link
               to="/dashboard"
               className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               activeProps={{ className: "bg-secondary text-foreground" }}
             >
-              Admin
+              Admin Dashboard
             </Link>
           )}
         </nav>
@@ -115,7 +133,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-border bg-background px-4 pb-4 lg:hidden">
+        <nav className="animate-fade-in border-t border-border bg-background px-4 pb-4 lg:hidden">
           <div className="grid gap-1 pt-2">
             <Link
               to="/datasets"
@@ -150,13 +168,22 @@ export function SiteHeader() {
                 {l.label}
               </Link>
             ))}
+            {showSubmit && (
+              <Link
+                to="/submit-data"
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
+              >
+                Submit Data
+              </Link>
+            )}
             {isAdmin && (
               <Link
                 to="/dashboard"
                 onClick={() => setOpen(false)}
                 className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
               >
-                Admin dashboard
+                Admin Dashboard
               </Link>
             )}
           </div>
