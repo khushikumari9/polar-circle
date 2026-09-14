@@ -55,7 +55,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-1 lg:flex">
+        <nav key={role} className="ml-auto hidden animate-fade-in items-center gap-1 lg:flex">
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground data-[state=open]:bg-secondary data-[state=open]:text-foreground">
               Datasets <ChevronDown className="size-3.5" />
@@ -85,13 +85,22 @@ export function SiteHeader() {
               {l.label}
             </Link>
           ))}
+          {showSubmit && (
+            <Link
+              to="/submit-data"
+              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              activeProps={{ className: "bg-secondary text-foreground" }}
+            >
+              Submit Data
+            </Link>
+          )}
           {isAdmin && (
             <Link
               to="/dashboard"
               className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               activeProps={{ className: "bg-secondary text-foreground" }}
             >
-              Admin
+              Admin Dashboard
             </Link>
           )}
         </nav>
