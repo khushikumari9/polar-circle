@@ -12,7 +12,14 @@ import {
 import { useAuth, roleLabels } from "@/lib/auth";
 import { stations } from "@/lib/portal-data";
 
-const links = [
+const publicLinks = [
+  { to: "/", label: "Home" },
+  { to: "/outreach", label: "Outreach" },
+  { to: "/education", label: "Education" },
+  { to: "/news", label: "News" },
+] as const;
+
+const memberLinks = [
   { to: "/", label: "Home" },
   { to: "/visualization", label: "Visualization" },
   { to: "/outreach", label: "Outreach" },
@@ -24,8 +31,10 @@ const links = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const { user, role, isAdmin, signOut } = useAuth();
+  const { user, role, isAdmin, isResearcher, signOut } = useAuth();
   const navigate = useNavigate();
+  const links = isResearcher ? memberLinks : publicLinks;
+  const showSubmit = isResearcher && !isAdmin;
 
   const handleSignOut = async () => {
     await signOut();
