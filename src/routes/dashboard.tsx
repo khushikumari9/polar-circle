@@ -201,6 +201,36 @@ function DashboardPage() {
           ))}
         </div>
 
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle className="text-lg">Submission analytics</CardTitle>
+            <CardDescription>Pending vs. cleared items by section</CardDescription>
+          </CardHeader>
+          <CardContent className="h-72">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={[
+                  { name: "Datasets", items: datasets },
+                  { name: "Outreach", items: outreach },
+                  { name: "Careers", items: careers },
+                  { name: "Collaboration", items: collab },
+                ].map((g) => ({
+                  name: g.name,
+                  Pending: g.items.filter((i) => i.status === "Pending" || i.status === "Draft").length,
+                  Cleared: g.items.filter((i) => i.status !== "Pending" && i.status !== "Draft").length,
+                }))}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="name" stroke="var(--color-muted-foreground)" fontSize={12} />
+                <YAxis allowDecimals={false} stroke="var(--color-muted-foreground)" fontSize={12} />
+                <Tooltip />
+                <Bar dataKey="Pending" fill="var(--color-chart-1)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Cleared" fill="var(--color-chart-3)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
         <Tabs defaultValue="datasets" className="mt-10">
           <TabsList className="flex-wrap">
             <TabsTrigger value="datasets">Datasets</TabsTrigger>
