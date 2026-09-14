@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { BookOpen, GraduationCap } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
+import { Reveal } from "@/components/reveal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -82,8 +83,9 @@ function EducationPage() {
       <section className="mx-auto max-w-7xl px-4 py-12">
         <h2 className="text-2xl font-semibold">Learning modules</h2>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {modules.map((m) => (
-            <Card key={m.title}>
+          {modules.map((m, i) => (
+            <Reveal key={m.title} delay={i * 80}>
+            <Card className="h-full transition-shadow hover:shadow-polar">
               <CardHeader>
                 <GraduationCap className="size-6 text-primary" />
                 <CardTitle className="mt-2 text-base">{m.title}</CardTitle>
@@ -98,6 +100,7 @@ function EducationPage() {
                 </Button>
               </CardContent>
             </Card>
+            </Reveal>
           ))}
         </div>
       </section>
