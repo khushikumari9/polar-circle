@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { stations, newsItems } from "@/lib/portal-data";
+import { useAuth, roleLabels } from "@/lib/auth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
