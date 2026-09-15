@@ -14,6 +14,275 @@ export type Database = {
   }
   public: {
     Tables: {
+      career_applications: {
+        Row: {
+          applicant_name: string
+          career_id: string | null
+          created_at: string
+          cv_link: string | null
+          email: string
+          id: string
+          institution: string | null
+          statement: string
+          status: Database["public"]["Enums"]["submission_status"]
+          user_id: string | null
+        }
+        Insert: {
+          applicant_name: string
+          career_id?: string | null
+          created_at?: string
+          cv_link?: string | null
+          email: string
+          id?: string
+          institution?: string | null
+          statement?: string
+          status?: Database["public"]["Enums"]["submission_status"]
+          user_id?: string | null
+        }
+        Update: {
+          applicant_name?: string
+          career_id?: string | null
+          created_at?: string
+          cv_link?: string | null
+          email?: string
+          id?: string
+          institution?: string | null
+          statement?: string
+          status?: Database["public"]["Enums"]["submission_status"]
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "career_applications_career_id_fkey"
+            columns: ["career_id"]
+            isOneToOne: false
+            referencedRelation: "careers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      careers: {
+        Row: {
+          category: string
+          created_at: string
+          deadline: string | null
+          description: string
+          id: string
+          is_open: boolean
+          location: string
+          position: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          deadline?: string | null
+          description?: string
+          id?: string
+          is_open?: boolean
+          location?: string
+          position: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          deadline?: string | null
+          description?: string
+          id?: string
+          is_open?: boolean
+          location?: string
+          position?: string
+        }
+        Relationships: []
+      }
+      collaborations: {
+        Row: {
+          country: string | null
+          created_at: string
+          id: string
+          kind: string
+          partner: string
+          proposal: string
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["submission_status"]
+          submitted_by: string | null
+          updated_at: string
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          id?: string
+          kind?: string
+          partner: string
+          proposal?: string
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["submission_status"]
+          submitted_by?: string | null
+          updated_at?: string
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          id?: string
+          kind?: string
+          partner?: string
+          proposal?: string
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["submission_status"]
+          submitted_by?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      datasets: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          file_link: string | null
+          format: string
+          id: string
+          review_note: string | null
+          reviewed_by: string | null
+          station: string
+          status: Database["public"]["Enums"]["submission_status"]
+          submitted_by: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string
+          file_link?: string | null
+          format?: string
+          id?: string
+          review_note?: string | null
+          reviewed_by?: string | null
+          station?: string
+          status?: Database["public"]["Enums"]["submission_status"]
+          submitted_by?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          file_link?: string | null
+          format?: string
+          id?: string
+          review_note?: string | null
+          reviewed_by?: string | null
+          station?: string
+          status?: Database["public"]["Enums"]["submission_status"]
+          submitted_by?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      education_modules: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          kind: string
+          level: string
+          summary: string
+          title: string
+        }
+        Insert: {
+          content?: Json
+          created_at?: string
+          id?: string
+          kind?: string
+          level?: string
+          summary?: string
+          title: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          kind?: string
+          level?: string
+          summary?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      news: {
+        Row: {
+          category: string
+          content: string
+          created_at: string
+          created_by: string | null
+          id: string
+          image_link: string | null
+          published_at: string
+          title: string
+        }
+        Insert: {
+          category?: string
+          content?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          image_link?: string | null
+          published_at?: string
+          title: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          image_link?: string | null
+          published_at?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      outreach_posts: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          media_link: string | null
+          media_type: string
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["submission_status"]
+          submitted_by: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          media_link?: string | null
+          media_type?: string
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["submission_status"]
+          submitted_by?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          media_link?: string | null
+          media_type?: string
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["submission_status"]
+          submitted_by?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -53,6 +322,33 @@ export type Database = {
         }
         Relationships: []
       }
+      visualization_series: {
+        Row: {
+          id: string
+          parameter: string
+          recorded_at: string
+          station: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          id?: string
+          parameter: string
+          recorded_at?: string
+          station: string
+          unit?: string
+          value: number
+        }
+        Update: {
+          id?: string
+          parameter?: string
+          recorded_at?: string
+          station?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -68,6 +364,7 @@ export type Database = {
     }
     Enums: {
       app_role: "public_user" | "researcher" | "admin"
+      submission_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -196,6 +493,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["public_user", "researcher", "admin"],
+      submission_status: ["pending", "approved", "rejected"],
     },
   },
 } as const
