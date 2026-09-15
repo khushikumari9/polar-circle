@@ -43,8 +43,27 @@ const stationIcons: Record<string, typeof Snowflake> = {
 };
 
 function Home() {
+  const { user, role, loading } = useAuth();
+  const firstName = (user?.user_metadata?.full_name as string | undefined)?.split(" ")[0];
+
   return (
     <>
+      {user && !loading && (
+        <div className="animate-fade-in border-b border-border bg-ice/60">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-2 px-4 py-3 text-sm">
+            <Badge variant="secondary">{roleLabels[role]}</Badge>
+            <p className="text-foreground">
+              Welcome{role !== "public_user" ? `, ${firstName ?? "back"}` : ""} — you're signed in as a{" "}
+              <span className="font-medium">{roleLabels[role]}</span>.
+            </p>
+            {isResearcherHelper(role) && (
+              <Button asChild variant="link" size="sm" className="ml-auto px-0">
+                <Link to="/submit-data">Submit data</Link>
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
       <section className="relative isolate overflow-hidden">
         <img
           src={heroImage}
